@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>4 anni e 5 mesi insieme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Great Vibes', cursive;
+    background-color: #000; /* Nero di base per il fade in dello sfondo */
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh; /* pieno schermo */
+    overflow: hidden;
+}
+
+.sfondo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /* riempie tutto lo schermo */
+    object-position: top;  /* mostra la parte alta (arcobaleno) */
+    z-index: -1;           /* sfondo dietro al contenuto */
+    opacity: 0;
+    animation: fadeInBg 2.5s ease-in-out forwards;
+}
+
+.contenuto {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    padding: 34px;
+    padding-top: 16rem;
+    font-size: 4rem;
+}
+
+.img-cuore {
+    width: 80rem;
+    margin-left: -12rem;
+    margin-top: -18rem;
+    opacity: 0;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.5));
+    animation: fadeInHeart 2s ease-out 2.5s forwards;
+}
+.h1-nomi {
+    margin-top: -56rem;
+    letter-spacing: 1rem;
+    line-height: 7.8rem;
+    color: #F8D771; /* Oro romantico */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); /* Ombra più definita sul cuore */
+    opacity: 0;
+    animation: fadeInText 2s ease-out 4.5s forwards;
+}
+.wrt-top{
+    margin-top: -5rem;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); /* Migliore contrasto sul cielo */
+    opacity: 0;
+    animation: fadeInText 2s ease-out 4.5s forwards;
+}
+.wrt-bottom{
+    font-size: 5.5rem;
+    margin-top: 1rem;
+    margin-left: -3rem;
+    width: 63rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 0, 0, 0.3); /* Ombra più profonda e diffusa */
+    opacity: 0;
+    animation: fadeInText 2s ease-out 4.5s forwards;
+    letter-spacing: 0.1rem;
+}
+.date{
+    font-size: 8rem;
+    margin-top: -3rem;
+    color: #F8D771;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.4); /* Effetto halo per risaltare sull'erba */
+}
+.abrir-btn {
+    width: 57rem;
+    height: 7rem;
+    margin-top: 12rem;
+    font-size: 6rem;
+    border-radius: 6rem;
+    background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 100%);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: white;
+    font-family: 'Great Vibes', cursive;
+    box-shadow: 0 10px 20px rgba(255, 154, 158, 0.4);
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInText 2s ease-out 4.5s forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.abrir-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(255, 154, 158, 0.6);
+}
+
+@keyframes fadeInBg {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInHeart {
+    0% { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInText {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stili per la Modal */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-content {
+        background: #fffaf0; /* Carta antica / crema */
+        width: 85%;
+        max-width: 800px;
+        max-height: 85vh; /* Altezza massima per non uscire dallo schermo */
+        padding: 5rem;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        position: relative;
+        transform: scale(0.8) translateY(50px);
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        text-align: left;
+        color: #5d4037; /* Marrone scuro elegante per il testo */
+        border: 2px solid #F8D771;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-overlay.active .modal-content {
+        transform: scale(1) translateY(0);
+    }
+
+    .modal-lettera {
+        font-size: 3.2rem; /* Leggermente ridotto per testi lunghi */
+        line-height: 1.5;
+        overflow-y: auto;
+        padding-right: 2.5rem;
+        flex-grow: 1; /* Occupa tutto lo spazio disponibile */
+    }
+
+    /* Scrollbar personalizzata per la lettera */
+    .modal-lettera::-webkit-scrollbar {
+        width: 10px;
+    }
+    .modal-lettera::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+    }
+    .modal-lettera::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #F8D771, #ff9a9e);
+        border-radius: 10px;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        font-size: 5rem;
+        cursor: pointer;
+        color: #F8D771;
+        line-height: 1;
+        z-index: 10;
+        background: #fffaf0;
+        border-radius: 50%;
+        width: 6rem;
+        height: 6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .close-modal:hover {
+        color: #ff9a9e;
+    }
+    .img-paesaggio {
+           width: 49rem;
+    }
+
+    </style>
+</head>
+<body>
+    <img src="sfondo1.jpeg" class="sfondo">
+    <div class="contenuto">
+        <h1 class="wrt-top">Felices 4 anos y 5 mesi juntos!!</h1>
+        <img src="heart.png" alt="" class="img-cuore">
+        <h1 class="h1-nomi">Andrea <br> + <br> Giorgio</h1>
+        <button class="abrir-btn" id="openBtn">Abrir</button>
+        <h1 class="wrt-bottom">Ti amo immensamente <br> mi compagnera de vida!!</h1>
+        <h1 class="wrt-bottom date">23 Marzo 2026</h1>
+    </div>
+
+    <!-- Modal per la Lettera -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <span class="close-modal" id="closeBtn">&times;</span>
+            <div class="modal-lettera">
+                <img class="img-paesaggio" src="Paesaggio1.jpg" alt="">
+                <p style="text-align: center;">¡Felices 4 años y 5 meses juntos, amor de mi vida!</p>
+                <p style="text-align: center;">Quiero agradecerte, mi compañera de vida, por regalarme este mes más y todo esto tiempo que hacemos vivido juntos, que pasó volando tan rápido como un latido de nuestros corazones. Quiero decirte que hoy estoy emocionado porque comenzaremos juntos nuestra nueva aventura universitaria y celebraremos este hito de nuestro amor con el inicio de este nuevo ciclo de estudios, que estoy seguro que afrontarás con toda tu fuerza y energía. ¡Espero que aprendas cosas nuevas y valiosas que enriquezcan tu conocimiento! Me encanta verte tan emocionado porque yo también estoy feliz de estar aquí, y te agradezco que me hayas permitido participar en la planificación de nuestros momentos juntos y en la organización de todo tan bien. Espero que este sea un viaje extraordinario para ti, y recuerda siempre nunca rendirte, porque cada día eres el número uno en todo el universo, capaz de afrontar y superar cualquier desafío, amor de mi vida. Te admiro cada día por la pasión que pones en todo lo que haces, porque lo haces con el corazón, e incluso en esos momentos difíciles, siempre logras hacer cosas extraordinarias, levantándote más fuerte que cualquier huracán en la tierra y llevando todo hasta el final. Te admiro cada día, amor de mi vida, y me encanta estar aquí para apoyarte incluso en esos momentos que parecen imposibles. Siempre estaré aquí para tenderte la mano, para abrazarte y darte todo mi amor y ayuda, para que juntos podamos superar cada obstáculo en la vida y protegerte de todo daño en mis brazos, mientras como un tren en marcha vivimos cada momento de la vida juntos, y quiero que cada momento te brinde solo cosas hermosas y únicas por la persona extraordinaria y única que eres. Quiero agradecerte, amor de mi vida, por ser mi apoyo y creer en mí cada momento y en lo que hago. Me encanta hacer esto juntos, para complementarnos. Siento que la vida nos está dando maravillosas oportunidades de crecimiento día tras día, que nos han llevado, incluso profesionalmente, a unir fuerzas y ser completamente uno. Debemos seguir así juntos porque con cada día que pasa, siento que nuestro vínculo se fortalece cada vez más, y nuestra confianza nos une aún más, junto con nuestro amor que crece hacia el infinito. Quiero agradecerte todo el amor incondicional que me das cada día, que me hace sentir segura y fuerte, borrando todo miedo e inseguridad. Me encanta cómo nos comunicamos con el corazón en cada momento, y con solo una mirada, nos entendemos. Me encanta vivir en tus brazos mientras me abrazas fuerte, y me siento como en casa a cada instante, mientras siento mi alma entrar en tu corazón al escuchar la melodía de tu precioso corazón, ¡al que agradezco por mantener viva a mi preciosa y única Andrea! Te amo inmensamente desde lo más profundo de mi corazón, donde tu nombre está grabado indeleblemente, y con cada latido estoy aquí para ti, el amor de mi vida, para darte todo el amor que tengo para ofrecer, incluso a mi manera, para verte cada momento, haciéndote sentir bien y feliz, porque cada día lo que más deseo en el mundo es verte sentir bien, y cuando esto sucede, mi corazón se alegra de estar aquí a tu lado, y cada momento quiero decirte que me completas, ¡dándome hermosas emociones que no puedo describir! Te amo infinitamente desde lo más profundo de mi mente, donde cada día, desde la mañana en adelante, eres el pensamiento más hermoso y único, que por la noche se transforma en un sueño extraordinario que quiero vivir cada momento de mi vida y más allá. Te amo infinitamente, tú que eres más importante que el oxígeno que respiro, eres la estrella que me guía y me protege en la vida y que me protege mostrándome en cada momento cómo afrontar las situaciones, incluso las más difíciles, de la manera correcta y borrando todo miedo en mí, dándome la fuerza para enfrentar la vida y llenando mi corazón de amor y felicidad infinitos, tú que eres mi precioso y único pingüino al que quiero amar por toda mi vida y más allá, tú que eres mi extraordinaria mogliettina número uno en todo el universo, ¡mi todo! ¡Felices 4 años y 5 meses juntos, amor de mi vida, y un hermoso comienzo en la universidad que juntos enfrentaremos día tras día con la cabeza bien alta! Como hoy, celebraremos brindando en gloria por cada logro alcanzado porque juntos siempre somos capaces de hacer cosas extraordinarias cada día. Que Dios siempre te bendiga, amor de mi vida, junto con nuestras metas como pareja y como individuos, y que bendiga nuestro amor y nuestra relación cada día, que cada día es nuestro punto de referencia y que hace que nuestro vínculo crezca hacia el infinito y más allá. </p>
+                <p>Andrea + Giorgio = ¡hoy, para siempre y más allá!</p>
+                <iframe style="    width: 48rem; height: 30rem;" width="560" height="315" src="https://www.youtube.com/embed/Gcf7J0zrYx4?si=lMdfC6iW-MOJk9er" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const openBtn = document.getElementById('openBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+
+        openBtn.addEventListener('click', () => {
+            modalOverlay.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+        });
+
+        // Chiudi la modal cliccando fuori dal contenuto
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
